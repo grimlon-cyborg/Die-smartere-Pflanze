@@ -1,1 +1,1 @@
-Dieses Projekt wurde fuer den Jugend forscht Wettbewerb 2025 erstellt. 
+Dieses Projekt wurde für den Jugend forscht Wettbewerb 2025 erstellt. 
