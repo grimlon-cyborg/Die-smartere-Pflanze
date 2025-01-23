@@ -47,6 +47,7 @@ int sensorValueBodenfeuchte3 = 0; //wert bodenfeuchte3 sensor am anfang
 int sensorValueBodenfeuchte4 = 0;  //wert bodenfeuchte4 sensor am anfang 
 
 
+#include "sunrise.h"
 
 
 void setup() {
@@ -66,6 +67,11 @@ void setup() {
   pinMode(RELAY2, OUTPUT);
   digitalWrite(RELAY3, HIGH); // Relais aus
   digitalWrite(RELAY2, HIGH); // Relais aus
+
+
+
+  // CO2
+  setup_sunrise();
 }
 
 void loop() {
@@ -116,7 +122,11 @@ void loop() {
   Serial.println(); // Abschluss der Bodenfeuchtedaten
 
 
-
+  // CO2 sensor 
+  read_sensor_measurements(SUNRISE_ADDR);
+  Serial.print("CO2: ");
+  Serial.print(co2Val);
+  Serial.println(" ppm"); 
 }
 
 // Funktion: Sensor-Daten lesen und ausgeben
