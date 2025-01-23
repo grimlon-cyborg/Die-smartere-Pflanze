@@ -9,9 +9,6 @@
 #define DHTPIN 2       // what pin we're connected to
 #define DHTTYPE DHT22  // DHT22
 
-
-
-
 Adafruit_NeoPixel strip(NUM_LEDS, LED_PIN, NEO_GRB + NEO_KHZ800);  // NeoPixel-Objekt
 DHT dht(DHTPIN, DHTTYPE);  // DHT-Sensor initialisieren
 
@@ -19,16 +16,14 @@ float hum;   // Speichert die Luftfeuchtigkeit
 float temp;  // Speichert die Temperatur
 
 const int RELAY3 = 3; // Relay pin Waerme 
-const int RELAY2 = 4; // Relay pin kaelte 
+const int RELAY2 = 4; // Relay pin Kaelte 
 
-
- 
 // Analogsensoren 
-int sensorLicht = A4; //Pin licht sensor 
-int sensorBodenfeuchte1 = A0;  //Pin Bodenfeuchte1 sensor 
-int sensorBodenfeuchte2 = A1;  //Pin Bodenfeuchte2 sensor 
-int sensorBodenfeuchte3= A2;  //Pin Bodenfeuchte3 sensor 
-int sensorBodenfeuchte4 = A3; //Pin Bodenfeuchte4 sensor 
+int sensorLicht = A4;          // Pin Licht-Sensor 
+int sensorBodenfeuchte1 = A0;  // Pin Bodenfeuchte1-Sensor 
+int sensorBodenfeuchte2 = A1;  // Pin Bodenfeuchte2-Sensor 
+int sensorBodenfeuchte3 = A2;  // Pin Bodenfeuchte3-Sensor 
+int sensorBodenfeuchte4 = A3;  // Pin Bodenfeuchte4-Sensor 
 
 // Timing-Variablen
 unsigned long lastSensorRead = 0;     // Zeit des letzten Sensor-Updates
@@ -37,21 +32,20 @@ unsigned long lastAnimationStep = 0; // Zeit des letzten Animation-Schritts
 unsigned long animationInterval = 50; // Intervall für Animation-Schritte
 
 unsigned long relayStartTime = 0; // Startzeit für die Relais
-bool relaysActive = false; // Status der Relais
+bool relaysActive = false;        // Status der Relais
 
-int rainbowOffset = 0;  // Fortschritt im Regenbogen-Effekt
-int sensorValueLicht = 0; //wert licht sensor am anfang 
-int sensorValueBodenfeuchte1 = 0;  //wert bodenfeuchte1 sensor am anfang 
-int sensorValueBodenfeuchte2= 0;  //wert bodenfeuchte2 sensor am anfang 
-int sensorValueBodenfeuchte3 = 0; //wert bodenfeuchte3 sensor am anfang 
-int sensorValueBodenfeuchte4 = 0;  //wert bodenfeuchte4 sensor am anfang 
-
-
-//#include "sunrise.h"
-
+int rainbowOffset = 0;            // Fortschritt im Regenbogen-Effekt
+int sensorValueLicht = 0;         // Wert Licht-Sensor am Anfang 
+int sensorValueBodenfeuchte1 = 0; // Wert Bodenfeuchte1-Sensor am Anfang 
+int sensorValueBodenfeuchte2 = 0; // Wert Bodenfeuchte2-Sensor am Anfang 
+int sensorValueBodenfeuchte3 = 0; // Wert Bodenfeuchte3-Sensor am Anfang 
+int sensorValueBodenfeuchte4 = 0; // Wert Bodenfeuchte4-Sensor am Anfang 
 
 void setup() {
+  // Serielle Kommunikation initialisieren
   Serial.begin(115200);
+  Serial.println("Serielle Kommunikation gestartet mit 115200 Baud.");
+  Serial.println("Programm gestartet.");
 
   // Temp-Sensor initialisieren
   Serial.println("DHT22 sensor testing");
@@ -61,17 +55,14 @@ void setup() {
   strip.begin();
   strip.setBrightness(100);
   strip.show();  // Alle LEDs ausschalten
+  Serial.println("LEDs initialisiert.");
 
   // Relais-Pins initialisieren
   pinMode(RELAY3, OUTPUT);
   pinMode(RELAY2, OUTPUT);
   digitalWrite(RELAY3, HIGH); // Relais aus
   digitalWrite(RELAY2, HIGH); // Relais aus
-
-
-
-  // CO2
- // setup_sunrise();
+  Serial.println("Relais initialisiert.");
 }
 
 void loop() {
@@ -92,39 +83,27 @@ void loop() {
   // Relais-Steuerung
   handleRelays(currentMillis);
 
-  //licht sensor ausgabe
-  Serial.print("Licht: ");
-
+  // Licht-Sensor ausgeben
   sensorValueLicht = analogRead(sensorLicht); 
+  Serial.print("Licht: ");
   Serial.println(sensorValueLicht); 
 
-
- //bodenfeuchte ausgabe
- Serial.print("Bodenfeuchte 1-4: ");
-
+  // Bodenfeuchte ausgeben
+  Serial.print("Bodenfeuchte 1-4: ");
   sensorValueBodenfeuchte1 = analogRead(sensorBodenfeuchte1); 
   Serial.print(sensorValueBodenfeuchte1); 
+  Serial.print(", "); 
 
- Serial.print(", "); 
-
-    sensorValueBodenfeuchte2 = analogRead(sensorBodenfeuchte2); 
+  sensorValueBodenfeuchte2 = analogRead(sensorBodenfeuchte2); 
   Serial.print(sensorValueBodenfeuchte2); 
-
-   Serial.print(", ");
+  Serial.print(", ");
 
   sensorValueBodenfeuchte3 = analogRead(sensorBodenfeuchte3); 
   Serial.print(sensorValueBodenfeuchte3); 
-
-   Serial.print(", ");
+  Serial.print(", ");
 
   sensorValueBodenfeuchte4 = analogRead(sensorBodenfeuchte4); 
-  Serial.print(sensorValueBodenfeuchte4); 
-  Serial.println(); // Abschluss der Bodenfeuchtedaten
-
-
-  // CO2 sensor 
- // read_sensor_measurements(SUNRISE_ADDR);
- 
+  Serial.println(sensorValueBodenfeuchte4); // Abschluss der Bodenfeuchtedaten
 }
 
 // Funktion: Sensor-Daten lesen und ausgeben
@@ -178,5 +157,3 @@ void handleRelays(unsigned long currentMillis) {
     }   
   }
 }
-
-
