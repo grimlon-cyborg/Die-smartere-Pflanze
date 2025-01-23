@@ -47,11 +47,11 @@ int sensorValueBodenfeuchte3 = 0; //wert bodenfeuchte3 sensor am anfang
 int sensorValueBodenfeuchte4 = 0;  //wert bodenfeuchte4 sensor am anfang 
 
 
-#include "sunrise.h"
+//#include "sunrise.h"
 
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   // Temp-Sensor initialisieren
   Serial.println("DHT22 sensor testing");
@@ -71,7 +71,7 @@ void setup() {
 
 
   // CO2
-  setup_sunrise();
+ // setup_sunrise();
 }
 
 void loop() {
@@ -123,10 +123,8 @@ void loop() {
 
 
   // CO2 sensor 
-  read_sensor_measurements(SUNRISE_ADDR);
-  Serial.print("CO2: ");
-  Serial.print(co2Val);
-  Serial.println(" ppm"); 
+ // read_sensor_measurements(SUNRISE_ADDR);
+ 
 }
 
 // Funktion: Sensor-Daten lesen und ausgeben
@@ -177,7 +175,7 @@ void handleRelays(unsigned long currentMillis) {
       digitalWrite(RELAY2, LOW); // Relais ausschalten
       relaysActive = false;
       Serial.println("Relais ausgeschaltet.");
-    }
+    }   
   }
 }
 
