@@ -43,8 +43,8 @@ int sensorValueBodenfeuchte4 = 0; // Wert Bodenfeuchte4-Sensor am Anfang
 
 void setup() {
   // Serielle Kommunikation initialisieren
-  Serial.begin(115200);
-  Serial.println("Serielle Kommunikation gestartet mit 115200 Baud.");
+  Serial.begin(9600);
+  Serial.println("Serielle Kommunikation gestartet mit 9600 Baud.");
   Serial.println("Programm gestartet.");
 
   // Temp-Sensor initialisieren

@@ -100,7 +100,7 @@ void setup_sunrise()
   /* Initialize I2C and use default pins defined for the board */
   reInitI2C();
  
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   Serial.println("Initialization complete\n");
 
