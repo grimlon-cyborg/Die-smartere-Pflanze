@@ -17,6 +17,7 @@ float temp;  // Speichert die Temperatur
 
 const int RELAY3 = 3; // Relay pin Waerme 
 const int RELAY2 = 4; // Relay pin Kaelte 
+const int RELAY2 = 5; // Relay pin Pumpe  
 
 // Analogsensoren 
 int sensorLicht = A4;          // Pin Licht-Sensor 
